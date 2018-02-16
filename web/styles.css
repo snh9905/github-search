@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Material+Icons);
+
+* {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.list-item-with-click {
+  cursor: pointer;
+}
+
+.list-item-with-hover:hover {
+  background: #efefef;
+}

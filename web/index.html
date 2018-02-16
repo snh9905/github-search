@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Github User Search</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+        // TODO: REMOVE THIS BLOCK OF CODE IN PRODUCTION
+        (function () {
+          var m = document.location.pathname.match(/^(\/[-\w]+)+\/web($|\/)/);
+          document.write('<base href="' + (m ? m[0] : '/') + '" />');
+        }());
+        
+      </script>
+
+      <!-- TODO: UNCOMMENT THE FOLLOWING LINE IN PRODUCTION  -->
+      <!-- <base href="/"> -->
+
+    <!-- main scripts. first on purpose. -->
+    <script defer src="main.dart" type="application/dart"></script>
+    <script defer src="packages/browser/dart.js"></script>
+
+    <!-- using bootstrap here to save time -->
+    <link 
+      rel="stylesheet" 
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+      crossorigin="anonymous">
+      <!-- custom styles --> 
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="icon" type="image/png" href="favicon.png">
+  </head>
+  <body>
+    <my-app>Loading...</my-app>
+  </body>
+</html>
