@@ -30,7 +30,15 @@
     <li *ngFor="let repo of repos;" 
         class="list-group-item d-flex justify-content-between align-items-center list-item-with-hover list-item-with-click" 
         (click)="showDetails(repo)">
-        {{repo.name}}
-        <span>{{repo.updatedString}}</span>
+        <span>{{repo.name}}</span>
+        <div class="w-25 d-flex justify-content-between align-items-center justify-content-end text-secondary">
+            <div><!-- need both divs for positining, in case the stars are 0 -->
+                <div *ngIf="repo.stars > 0" class="d-flex align-items-center">
+                    <material-icon icon="star_outline"></material-icon> 
+                    <span class="mt-1">{{repo.stars}}</span>
+                </div>
+            </div>
+            <span>{{repo.updatedString}}</span>
+        </div>
     </li>
 </ul>
