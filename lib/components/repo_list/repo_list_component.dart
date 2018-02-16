@@ -24,10 +24,12 @@ class RepoListComponent implements OnInit {
   final RepoService _repoService;
   final Router _router;
 
-  List<Repo> repos = globals.repos;
+  List<Repo> repos;
   String username = globals.username;
   String message;
   bool showSpinner = false;
+
+  Map<String, dynamic> results;
 
   RepoListComponent(this._router, this._repoService);
 
@@ -36,33 +38,41 @@ class RepoListComponent implements OnInit {
     
     // if we used the back button, fill the list back in
     // needs more testing to determine which navigation scenarios will result in empty data
-    if (globals.repos != null) {
-      repos = globals.repos;
+    if (globals.repoResults != null) {
+      results = globals.repoResults;
+      repos = globals.repoResults["results"];
     } else {
       message = "Search for a Github username to get started.";
+      globals.username = username = "";
     }
   
   }
 
-  Future<Null> getRepos() async { 
+  Future<Null> getRepos([String pageUrl = ""]) async { 
     showSpinner = true;
     message = null;
 
-    repos = await _repoService.getReposForUser(username);
-    globals.repos = null;
-    globals.username = username;
+    try {
+      results = await _repoService.getReposForUser(username, pageUrl);
+      globals.repoResults = null;
+      globals.username = username;
 
-    showSpinner = false;
+      showSpinner = false;
 
-    if (repos == null) {
-      message = "No user found with the username, " + username + ".";
+      if (results == null) {
+        message = "No user found with the username, " + username + ".";
 
-    } else if (repos.length < 1) {
-      message = "No public repositories found for the user " + username + "."; 
+      } else if (results["results"].length < 1) {
+        message = "No public repositories found for the user " + username + "."; 
 
-    } else {
-      message = null;
-      globals.repos = repos;
+      } else {
+        message = null;
+        repos = results["results"];
+        globals.repoResults = results;
+      }
+
+    } catch (exception, stacktrace) {
+      print(exception + " : " + stacktrace); 
     }
   }
 

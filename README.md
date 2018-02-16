@@ -7,6 +7,7 @@ Created with Dart and Angular.
 ### with more time...
 
 * SCSS/material (or custom) compomemts/lose bootstrap
-* Full paging
-* More data at a glance
+* More robust paging
+* Display more data at a glance
 * Full testing
+* More data validation

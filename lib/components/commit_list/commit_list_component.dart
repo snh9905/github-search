@@ -30,31 +30,45 @@ class CommitListComponent implements OnInit {
   String repoName;
   String username;
   String message;
+  bool showSpinner = false;
+
+  Map<String, dynamic> results;
 
   CommitListComponent(this._repoService, this._routeParams, this._location);
 
   @override
   Future<Null> ngOnInit() async {
-    
-    try {
-      repoName = _routeParams.get('name');
-      username = _routeParams.get('username');
-    
-      if (repoName != null && username != null) {
-        globals.username = username;
-        commits = await (_repoService.getCommitsByRepo(repoName, username));
-      } 
 
-      if (commits == null) {
-        message = "There are no commits to display.";
-      }
+    repoName = _routeParams.get('name');
+    username = _routeParams.get('username');
 
-    } catch (exception, stacktrace) {print("IT FAILED");
-      // needs better error handling
-      print(exception + " : " + stacktrace); 
-
+    if (repoName != null && username != null) {
+      getCommits();
     }
     
+  }
+
+  Future<Null> getCommits([String pageUrl = ""]) async { 
+    showSpinner = true;
+    message = null;
+
+    try {
+      globals.username = username;
+      results = await (_repoService.getCommitsByRepo(repoName, username, pageUrl));
+
+      showSpinner = false;
+      
+      if (results == null) {
+        message = "There are no commits to display.";
+      } else {
+        message = null;
+        commits = results["results"];
+      }
+
+    } catch (exception, stacktrace) {
+      print(exception + " : " + stacktrace); 
+    }
+
   }
 
   void openCommit(Commit commit) {
