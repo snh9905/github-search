@@ -6,7 +6,7 @@ Created with Dart and Angular.
 
 ### with more time...
 
-* SCSS/material (or custom) compoments/lose bootstrap
+* SCSS/material (or custom) components/lose bootstrap
 * More robust paging
 * Display more data at a glance
 * Full testing
